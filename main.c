@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 
 //funciones hello world
 void helloWorld(){
@@ -8,9 +8,10 @@ void helloWorld(){
 
 //funcion principal main
 int main () {
-
+    int numero;
     //prueba de cooncepto
     helloWorld();
-    printf("Parcial #3 herramientas \n");
+    printf("Ingrese un numero: \n");
+    scanf(" %d, &numero");
     return 0;
 }
