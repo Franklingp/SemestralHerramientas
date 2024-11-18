@@ -53,4 +53,4 @@ dkms.conf
 
 #carpeta de configuraciones
 .vscode/
-.output/
+output/
