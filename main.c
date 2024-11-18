@@ -11,6 +11,6 @@ int main () {
 
     //prueba de cooncepto
     helloWorld();
-    printf("Parcial #3 herramientas ");
+    printf("Parcial #3 herramientas \n");
     return 0;
 }
