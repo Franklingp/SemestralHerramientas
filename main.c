@@ -128,6 +128,27 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
     fclose(registroNotas);
 }
 
+//FUNCION PARA CALCULAR EL INDICE
+void calcularIndice(int creditos){
+    char A, B, C, D, F;
+    int puntos, indice, valor = 0, nota = 0;
+    int totalCreditos = 0;
+    //PARA QUE LA VARIABLE VALOR TENGA SU NÚMERO
+    if(nota == A)
+        valor = valor + 3;
+        else if(nota == B)
+            valor = valor + 2;
+            else if(nota == C)
+                valor = valor + 1;
+                else if(nota == D || nota == F)
+                    valor = 0;
+    //FORMULAS PARA CALCULAR TODO
+    puntos = valor * creditos;
+    //FALTA HACER EL CICLO DE REPETICIÓN PARA EL TOTAL DE CREDITOS
+    indice = puntos/totalCreditos;
+}
+
+
 //funcion principal main
 int main () {
     //defincion de variables
