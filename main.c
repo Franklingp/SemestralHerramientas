@@ -22,18 +22,28 @@ struct registroNotas {
 //Leer datos del archivo
 void leerDatosArchivo(){
     printf("Lectura de datos \n");
+    FILE *registroNotas;
+
+    registroNotas = fopen("registroNotas.txt", "r");
+
+    while(!(feof(registroNotas)))
+    {
+        fscanf(registroNotas, "%d %d %c %s\n", &codAs,&creditos,&status,descripcion);
+        printf("%d %d %c %s\n",codAs,creditos,status,descripcion);
+    }
+    getch();
+    fclose(fptArchivo);
 }
 
 //funcion principal main
-int main () {
-    //defuincion de variables
-    FILE *registroNotas;
-
+void main () {
+    //defincion de variables
+    struct estudiantes[8]
 
     //deficion de archivos 
+    //FILE *registroNotas;
 
     
     //prueba de cooncepto
     printf("Inicio del semestral \n");
-    return 0;
 }
