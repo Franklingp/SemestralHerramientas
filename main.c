@@ -135,7 +135,6 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
     //getch();
     fclose(registroNotas);
     }
-}
 
 //FUNCION PARA CALCULAR EL INDICE
 void calcularIndice(int creditos[6], int totalCreditos)
@@ -188,7 +187,7 @@ int main () {
     //leerArchivoAsignatura(asignaturas);
 
     //lectura de notas
-    //leerArchivoNotas(notas, estudiantes);
+    leerArchivoNotas(notas, estudiantes);
 
     int creditos[6];
     int totalCreditos = 0;
