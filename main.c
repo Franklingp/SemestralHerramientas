@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 FILE * archivoAignaturas;
-FILE *registroNotas;
+FILE * registroNotas;
 
 //variable global para saber cantidad de estudiantes
 int NUMERO_ESTUDIANTES=8;
@@ -31,10 +31,15 @@ struct asignaturas {
     int creditos;
     char status;
     char nombreAsignaturas[15];
+};
+
+//leer archivo de asignaturas
+void leerArchivoAsignatura(){
+    //SAMUEL
 }
 
 //Leer datos del archivo
-void leerDatosArchivo(){
+void leerArchivoNotas(){
     registroNotas = fopen("registroNotas.txt", "r");
     printf("Lectura de datos \n");
 
