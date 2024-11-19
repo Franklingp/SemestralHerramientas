@@ -174,7 +174,7 @@ void calcularIndice(int creditos[6], int totalCreditos)
 
 
 //funcion principal main
-int main () {
+void main () {
     //defincion de variables
     struct registroEstudiante estudiantes[8];
     struct registroNotas notas[8][4];
