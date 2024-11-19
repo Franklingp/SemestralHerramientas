@@ -42,7 +42,7 @@ void leerArchivoAsignatura(struct registroAsignaturas asignaturas[59]){
 
     // while(!(feof(archivoAignaturas)))
     while(contador<58){
-        //1 1 7987 - 5 CALCULO I
+        //ESTO ES PARA IMPRIMIR TODAS LAS ASIGNATURAS
         fscanf(archivoAsignaturas, "%d %d %s %c %d %[^\n]\n", 
             &asignaturas[contador].añoAcademico, 
             &asignaturas[contador].semestre, 
