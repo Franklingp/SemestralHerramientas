@@ -38,7 +38,8 @@ void leerDatosArchivo(){
 //funcion principal main
 void main () {
     //defincion de variables
-    struct estudiantes[8]
+    struct registroEstudiante estudiantes[8];
+    struct registroNotas notas[8];
 
     //deficion de archivos 
     //FILE *registroNotas;
