@@ -13,5 +13,6 @@ int main () {
     helloWorld();
     printf("Ingrese un numero: \n");
     scanf(" %d, &numero");
+    numero ++;
     return 0;
 }
