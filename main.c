@@ -105,23 +105,31 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
         printf("%s %s \n", estudiantes[contadorEstudiante].cedula, estudiantes[contadorEstudiante].nombre);
 
         //lee los datos del semestre
-        for(int i=0; i<4; i++){
-            fscanf(registroNotas, "%d %c \n", notas[contadorEstudiante][i].año, notas[contadorEstudiante][i].semestre);
-            printf("%d %c \n", notas[contadorEstudiante][i].año, notas[contadorEstudiante][i].semestre);
+        for(int i=0; i<4; i++){ 
+            fscanf(registroNotas, "%d %d \n", &notas[contadorEstudiante][i].año, &notas[contadorEstudiante][i].semestre);
+            printf("%d %d \n", notas[contadorEstudiante][i].año, notas[contadorEstudiante][i].semestre);
 
             //verificacion si es verano
             if(notas[contadorEstudiante][i].semestre==0){
                 auxiliarSemestre=2;
+                printf("Es un verano ******* \n");
             }else{
                 auxiliarSemestre=6;
+                printf("Es un semestre ******* \n");
             }
 
             //lectura de notas
-            for(int i=0; i<4; i++){
-                fscanf(registroNotas, "%d %c \n", notas[contadorEstudiante][i].año, notas[contadorEstudiante][i].semestre);
-                printf("%d %c \n", notas[contadorEstudiante][i].año, notas[contadorEstudiante][i].semestre);
+            for(int j=0; j<auxiliarSemestre; j++){  //auxiliarSemestre
+                fscanf(registroNotas, "%s %c \n", 
+                    notas[contadorEstudiante][i].codigoAsignatura[j], 
+                    &notas[contadorEstudiante][i].notas[j]
+                );
+                printf("%s %c \n", 
+                    notas[contadorEstudiante][i].codigoAsignatura[j], 
+                    notas[contadorEstudiante][i].notas[j]
+                );
+            }
         }
-
         contadorEstudiante++;
     }
     //getch();
