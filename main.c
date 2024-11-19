@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 //definicion de arvhivos
-FILE * archivoAignaturas;
+FILE * archivoAsignaturas;
 FILE * registroNotas;
 
 //variable global para saber cantidad de estudiantes
@@ -11,7 +11,7 @@ int NUMERO_ESTUDIANTES=8;
 //estructura de registro de notas de estudiante
 struct registroEstudiante {
     int cedula;
-    char nombre;
+    char nombre[50];
 
 };
 
@@ -19,7 +19,7 @@ struct registroEstudiante {
 struct registroNotas {
     int año;
     int semestre;
-    int codigoAsignacion[6];
+    char codigoAsignatura[6][6];
     char notas[6];
 };
 
@@ -28,30 +28,29 @@ struct registroNotas {
 struct registroAsignaturas {
     int semestre;
     int añoAcademico;
-    int codigoAsignatura;
+    char codigoAsignatura[6];
     int creditos;
     char status;
-    char nombreAsignatura[15];
+    char nombreAsignatura[50];
 };
 
 //leer archivo de asignaturas
 void leerArchivoAsignatura(struct registroAsignaturas asignaturas[59]){
     int contador = 0;
     printf("Lectura de asignaturas **************\n");
-    archivoAignaturas = fopen("asignaturas.txt", "r");
+    archivoAsignaturas = fopen("asignaturas.txt", "r");
 
     // while(!(feof(archivoAignaturas)))
-    while(contador<58)
-    {
+    while(contador<58){
         //1 1 7987 - 5 CALCULO I
-        fscanf(archivoAignaturas, "%d %d %d %c %d %c\n", 
+        fscanf(archivoAsignaturas, "%d %d %s %c %d %[^\n]\n", 
             &asignaturas[contador].añoAcademico, 
             &asignaturas[contador].semestre, 
             &asignaturas[contador].codigoAsignatura,
             &asignaturas[contador].status,
             &asignaturas[contador].creditos,
-            &asignaturas[contador].nombreAsignatura);
-        printf("%d %d %d %c %d %s\n", 
+            asignaturas[contador].nombreAsignatura);
+        printf("%d %d %s %c %d %s\n", 
             asignaturas[contador].añoAcademico, 
             asignaturas[contador].semestre, 
             asignaturas[contador].codigoAsignatura,
@@ -61,15 +60,15 @@ void leerArchivoAsignatura(struct registroAsignaturas asignaturas[59]){
         contador++;
     }
     //getch();
-    fclose(registroNotas);
+    fclose(archivoAsignaturas);
 }
 
 //Leer datos del archivo
 void leerArchivoNotas(){
-    registroNotas = fopen("registroNotas.txt", "r");
-    printf("Lectura de datos \n");
+    // registroNotas = fopen("registroNotas.txt", "r");
+    // printf("Lectura de datos \n");
 
-    registroNotas = fopen("registroNotas.txt", "r");
+    // registroNotas = fopen("registroNotas.txt", "r");
 
     // while(!(feof(registroNotas)))
     // {
@@ -83,8 +82,8 @@ void leerArchivoNotas(){
 //funcion principal main
 int main () {
     //defincion de variables
-    struct registroEstudiante estudiantes[8];
-    struct registroNotas notas[8];
+    //struct registroEstudiante estudiantes[8];
+    //struct registroNotas notas[8];
     struct registroAsignaturas asignaturas[59];
     
     //prueba de cooncepto
