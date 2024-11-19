@@ -92,7 +92,7 @@ void leerArchivoAsignatura(struct registroAsignaturas asignaturas[59]){
 //Leer datos del archivo
 void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiante estudiantes[8]){
     int contadorEstudiante = 0;
-    int contadorNotas = 0;
+    int auxiliarSemestre = 0;
     registroNotas = fopen("registroNotas.txt", "r");
     printf("Lectura de datos de notas ****** \n");
 
@@ -108,6 +108,18 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
         for(int i=0; i<4; i++){
             fscanf(registroNotas, "%d %c \n", notas[contadorEstudiante][i].año, notas[contadorEstudiante][i].semestre);
             printf("%d %c \n", notas[contadorEstudiante][i].año, notas[contadorEstudiante][i].semestre);
+
+            //verificacion si es verano
+            if(notas[contadorEstudiante][i].semestre==0){
+                auxiliarSemestre=2;
+            }else{
+                auxiliarSemestre=6;
+            }
+
+            //lectura de notas
+            for(int i=0; i<4; i++){
+                fscanf(registroNotas, "%d %c \n", notas[contadorEstudiante][i].año, notas[contadorEstudiante][i].semestre);
+                printf("%d %c \n", notas[contadorEstudiante][i].año, notas[contadorEstudiante][i].semestre);
         }
 
         contadorEstudiante++;
