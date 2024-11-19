@@ -26,8 +26,8 @@ void leerDatosArchivo(){
 
 //funcion principal main
 int main () {
-
     //defuincion de variables
+    FILE *registroNotas;
 
 
     //deficion de archivos 
