@@ -126,26 +126,43 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
     }
     //getch();
     fclose(registroNotas);
+    }
 }
 
 //FUNCION PARA CALCULAR EL INDICE
-void calcularIndice(int creditos){
-    char A, B, C, D, F;
-    int puntos, indice, valor = 0, nota = 0;
-    int totalCreditos = 0;
+void calcularIndice(int creditos[6], int totalCreditos)
+{
+    char nota[6]={0};
+    int puntos[6] ={0}, valor[6]={0};
+    int totalPuntos = 0;
+    float indice = 0;
     //PARA QUE LA VARIABLE VALOR TENGA SU NÚMERO
-    if(nota == A)
-        valor = valor + 3;
-        else if(nota == B)
-            valor = valor + 2;
-            else if(nota == C)
-                valor = valor + 1;
-                else if(nota == D || nota == F)
-                    valor = 0;
+    for(int i = 0; i < 6; i ++){
+        printf("Ingrese su nota: ");
+        scanf(" %c", &nota[i]);
+        if(nota[i] == 'A'){
+            valor[i] = valor[i] + 3;
+        }
+            else if(nota[i] == 'B'){
+                valor[i] = valor[i] + 2;
+            }
+                else if(nota[i] == 'C'){
+                    valor[i] = valor[i] + 1;
+                }
+                    else if(nota[i] == 'D' || nota[i] == 'F'){
+                        valor[i] = 0;
+                    }
+    }
     //FORMULAS PARA CALCULAR TODO
-    puntos = valor * creditos;
+    for(int i = 0; i < 6; i ++){
+        puntos[i] = valor[i] * creditos[i];
+        totalPuntos = totalPuntos + puntos[i];
+    }
     //FALTA HACER EL CICLO DE REPETICIÓN PARA EL TOTAL DE CREDITOS
-    indice = puntos/totalCreditos;
+    indice = totalPuntos/(float)totalCreditos;
+    printf("Sus puntos son : %d\n", totalPuntos);
+    printf("Sus creditos son: %d\n", totalCreditos);
+    printf("Su indice es de : %.2f\n", indice);
 }
 
 
@@ -157,13 +174,23 @@ int main () {
     struct registroAsignaturas asignaturas[59];
     
     //prueba de cooncepto
-    printf("Inicio del semestral \n");
+    //printf("Inicio del semestral \n");
 
     //lectura de archivos 
-    leerArchivoAsignatura(asignaturas);
+    //leerArchivoAsignatura(asignaturas);
 
     //lectura de notas
-    leerArchivoNotas(notas, estudiantes);
+    //leerArchivoNotas(notas, estudiantes);
 
+    int creditos[6];
+    int totalCreditos = 0;
+
+    for(int i = 0; i < 6; i ++)
+    {
+        printf("Ingrese los creditos: ");
+        scanf(" %d", &creditos[i]);
+        totalCreditos = totalCreditos + creditos[i];
+    }
+    calcularIndice(creditos, totalCreditos);
     return 0;
 }
