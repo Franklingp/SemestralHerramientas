@@ -31,7 +31,7 @@ struct asignaturas {
     int creditos;
     char status;
     char nombreAsignaturas[15];
-}
+};
 
 //Leer datos del archivo
 void leerDatosArchivo(){
