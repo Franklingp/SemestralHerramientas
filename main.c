@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+FILE * archivoAignaturas;
+
 //variable global para saber cantidad de estudiantes
 int NUMERO_ESTUDIANTES=8;
 
@@ -19,6 +21,17 @@ struct registroNotas {
     char notas[6];
 };
 
+//estructura de registro para asignaciones
+//1 1 7987 - 5 CALCULO I
+struct asignaturas {
+    int semestre;
+    int añoAcademico;
+    int codigoAsignatura;
+    int creditos;
+    char status;
+    char nombreAsignaturas[15];
+}
+
 //Leer datos del archivo
 void leerDatosArchivo(){
     printf("Lectura de datos \n");
@@ -26,13 +39,7 @@ void leerDatosArchivo(){
 
     registroNotas = fopen("registroNotas.txt", "r");
 
-    while(!(feof(registroNotas)))
-    {
-        fscanf(registroNotas, "%d %d %c %s\n", &codAs,&creditos,&status,descripcion);
-        printf("%d %d %c %s\n",codAs,creditos,status,descripcion);
-    }
-    getch();
-    fclose(fptArchivo);
+    //samuel
 }
 
 //funcion principal main
