@@ -63,32 +63,6 @@ void leerArchivoAsignatura(struct registroAsignaturas asignaturas[59]){
     fclose(archivoAsignaturas);
 }
 
-// 04-0860-001276 ABAD TORRES,  FELICITA VICTORIA
-// 2023 1
-// 7987 C
-// 0855 A
-// 0741 B
-// 8353 A
-// 0742 C
-// 0744 C
-// 2023 2
-// 7988 C
-// 8322 C
-// 0743 B
-// 8361 A
-// 0608 B
-// 1392 C
-// 2024 0
-// 1263 A
-// 1274 A
-// 2024 1
-// 0709 C
-// 8362 B
-// 8319 C
-// 1394 B
-// 0745 A
-// 0592 C
-
 //Leer datos del archivo
 void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiante estudiantes[8]){
     int contadorEstudiante = 0;
@@ -102,20 +76,20 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
 
         //lee los datos de un estudiante
         fscanf(registroNotas, "%s %[^\n]\n", estudiantes[contadorEstudiante].cedula, estudiantes[contadorEstudiante].nombre);
-        printf("%s %s \n", estudiantes[contadorEstudiante].cedula, estudiantes[contadorEstudiante].nombre);
+        // printf("%s %s \n", estudiantes[contadorEstudiante].cedula, estudiantes[contadorEstudiante].nombre);
 
         //lee los datos del semestre
         for(int i=0; i<4; i++){ 
             fscanf(registroNotas, "%d %d \n", &notas[contadorEstudiante][i].año, &notas[contadorEstudiante][i].semestre);
-            printf("%d %d \n", notas[contadorEstudiante][i].año, notas[contadorEstudiante][i].semestre);
+            // printf("%d %d \n", notas[contadorEstudiante][i].año, notas[contadorEstudiante][i].semestre);
 
             //verificacion si es verano
             if(notas[contadorEstudiante][i].semestre==0){
                 auxiliarSemestre=2;
-                printf("Es un verano ******* \n");
+                // printf("Es un verano ******* \n");
             }else{
                 auxiliarSemestre=6;
-                printf("Es un semestre ******* \n");
+                // printf("Es un semestre ******* \n");
             }
 
             //lectura de notas
@@ -124,10 +98,10 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
                     notas[contadorEstudiante][i].codigoAsignatura[j], 
                     &notas[contadorEstudiante][i].notas[j]
                 );
-                printf("%s %c \n", 
-                    notas[contadorEstudiante][i].codigoAsignatura[j], 
-                    notas[contadorEstudiante][i].notas[j]
-                );
+                // printf("%s %c \n", 
+                    // notas[contadorEstudiante][i].codigoAsignatura[j], 
+                    // notas[contadorEstudiante][i].notas[j]
+                // );
             }
         }
         contadorEstudiante++;
@@ -135,6 +109,32 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
     //getch();
     fclose(registroNotas);
     }
+
+
+//Funcion para calcular los puntos totales por asignacion
+int sumatoriaPuntos(char notas[6]){
+    printf("Sumatoria *****");
+    int sumatoria=0;
+
+    //Verificacion de la nota para la sumatoria
+    for(int i = 0; i < 6; i ++){
+        printf("Nota: %c \n", notas[i]);
+        if(notas[i] == 'A'){
+            sumatoria += 3;
+        }
+            else if(notas[i] == 'B'){
+                sumatoria += 2;
+            }
+                else if(notas[i] == 'C'){
+                    sumatoria += 1;
+                }
+                    else {
+                        sumatoria += 0;
+                    }
+    }
+
+    return sumatoria;
+}
 
 //FUNCION PARA CALCULAR EL INDICE
 void calcularIndice(int creditos[6], int totalCreditos)
@@ -184,13 +184,17 @@ int main () {
     //printf("Inicio del semestral \n");
 
     //lectura de archivos 
-    leerArchivoAsignatura(asignaturas);
+    //leerArchivoAsignatura(asignaturas);
 
     //lectura de notas
     leerArchivoNotas(notas, estudiantes);
 
     //calcular el incide
     // calcularIndice(creditos, totalCreditos);
+
+    //calcular sumatoria de puntos
+    int sumatoria = sumatoriaPuntos(notas[0][0].notas);
+    printf("%d", sumatoria);
 
     return 0;
 }
