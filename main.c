@@ -12,7 +12,8 @@ int main () {
     //prueba de cooncepto
     helloWorld();
     printf("Ingrese un numero: \n");
-    scanf(" %d, &numero");
+    scanf(" %d", &numero);
     numero ++;
+    printf("%d", numero);
     return 0;
 }
