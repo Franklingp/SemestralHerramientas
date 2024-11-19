@@ -184,20 +184,13 @@ int main () {
     //printf("Inicio del semestral \n");
 
     //lectura de archivos 
-    //leerArchivoAsignatura(asignaturas);
+    leerArchivoAsignatura(asignaturas);
 
     //lectura de notas
     leerArchivoNotas(notas, estudiantes);
 
-    int creditos[6];
-    int totalCreditos = 0;
+    //calcular el incide
+    // calcularIndice(creditos, totalCreditos);
 
-    for(int i = 0; i < 6; i ++)
-    {
-        printf("Ingrese los creditos: ");
-        scanf(" %d", &creditos[i]);
-        totalCreditos = totalCreditos + creditos[i];
-    }
-    calcularIndice(creditos, totalCreditos);
     return 0;
 }
