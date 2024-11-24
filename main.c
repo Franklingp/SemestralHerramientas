@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 
 //definicion de arvhivos
@@ -181,10 +181,10 @@ int main () {
     struct registroAsignaturas asignaturas[59];
     
     //prueba de cooncepto
-    //printf("Inicio del semestral \n");
+    printf("Inicio del semestral \n");
 
     //lectura de archivos 
-    //leerArchivoAsignatura(asignaturas);
+    leerArchivoAsignatura(asignaturas);
 
     //lectura de notas
     leerArchivoNotas(notas, estudiantes);
@@ -193,8 +193,10 @@ int main () {
     // calcularIndice(creditos, totalCreditos);
 
     //calcular sumatoria de puntos
-    int sumatoria = sumatoriaPuntos(notas[0][0].notas);
-    printf("%d", sumatoria);
+    //int sumatoria = sumatoriaPuntos(notas[0][0].notas);
+    //printf("%d", sumatoria);
+
+    printf("Hello world<<<<");
 
     return 0;
 }
