@@ -113,7 +113,7 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
 
 //Funcion para calcular los puntos totales por asignacion
 int sumatoriaPuntos(char notas[6]){
-    printf("Sumatoria *****");
+    printf("Sumatoria ***** \n");
     int sumatoria=0;
 
     //Verificacion de la nota para la sumatoria
@@ -179,6 +179,8 @@ int main () {
     struct registroEstudiante estudiantes[8];
     struct registroNotas notas[8][4];
     struct registroAsignaturas asignaturas[59];
+    int totalCreditos[8], totalPuntos[8];
+    float indice[8];
     
     //prueba de cooncepto
     printf("Inicio del semestral \n");
@@ -189,14 +191,30 @@ int main () {
     //lectura de notas
     leerArchivoNotas(notas, estudiantes);
 
+
+    //calcular sumatoria de puntos
+    int sumatoria = sumatoriaPuntos(notas[0][0].notas);
+    printf("%d", sumatoria);
+
+
     //calcular el incide
     // calcularIndice(creditos, totalCreditos);
 
-    //calcular sumatoria de puntos
-    //int sumatoria = sumatoriaPuntos(notas[0][0].notas);
-    //printf("%d", sumatoria);
+    //Impresion de datos
+    printf("Imprimir datos");
+    for(int i=0; i<8;i++){
 
-    printf("Hello world<<<<");
+        //datos del estuante
+        printf("Cedula del estudiante \n");
+        printf("Nombre del estudiante \n");
+
+        //Imprimir los datos
+        //encabezado
+        printf("%10s %10s %10s %10s %10s %10s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
+        for(int j=0; j<4; j++){
+            printf("%10s %10s %10s %10s %10s %10s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
+        }
+    }
 
     return 0;
 }
