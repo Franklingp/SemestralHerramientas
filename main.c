@@ -257,7 +257,7 @@ int sumatoriaCreditos(int vectorCreditos[6]){
 // }
 
 //mensajes
-void mensjes(struct registroNotas notas[4]){
+void mensjes(struct registroNotas notas[4], int condicionales){
     int contadorF = 0;
     int contadorD = 0;
 
@@ -274,17 +274,24 @@ void mensjes(struct registroNotas notas[4]){
     }
 
     if(contadorF>0){
-        printf("HA OBTENIDO F COMO CALIFICACIÓN, RECUERDE QUE SI TIENE 3 Fs CONSECUTIVAS, DEBE CAMBIARSE A UNA CARRERA DONDE NO EXISTA ESTE CÓDIGO");
+        printf("HA OBTENIDO F COMO CALIFICACIÓN, RECUERDE QUE SI TIENE 3 Fs CONSECUTIVAS, DEBE CAMBIARSE A UNA CARRERA DONDE NO EXISTA ESTE CÓDIGO \n\n");
     }
     if(contadorD>0){
         printf("HA OBTENIDO D COMO CALIFICACIÓN, RECUERDE QUE TIENE TRES OPCIONES: \n"); 
         printf("1.	SI LA MATERIA ES FUNDAMENTAL, DEBE REPETIR LA MISMA. \n"); 
         printf("2.	SI LA MATERIA NO ES FUNDAMENTAL Y LA HA RECIBIDO UN SOLA VEZ, PUEDE DEJARLA ASÍ \n"); 
-        printf("3.	SI LA MATERIA NO ES FUNDAMENTAL PERO HA OBTENIDO UNA F PREVIA, DEBE REPETIR LA MISMA YA QUE UNA D NO TAPA UNA F \n"); 
+        printf("3.	SI LA MATERIA NO ES FUNDAMENTAL PERO HA OBTENIDO UNA F PREVIA, DEBE REPETIR LA MISMA YA QUE UNA D NO TAPA UNA F \n\n"); 
     }
 
-         
-
+    if(condicionales>=3){
+        printf("SU SITUACIÓN ES CRÍTICA, YA QUE DEBE HACER CAMBIO DE CARRERA, PORQUE HA ALCANZADO 3 CONDICIONALES \n\n"); 
+    }else{
+        if(condicionales>=2){
+            printf("TIENE UNA CONDICIONAL, TRATE DE SUBIR EL ÍNDICE ACADÉMICO.  ESTÁ A TIEMPO \n\n"); 
+        }else{
+            printf("HA ALCANZADO 2 CONDICIONALES, ES RECOMENDABLE MATRICULAR MATERIAS CON D y F PARA SUBIR EL ÍNDICE\n\n"); 
+        }
+    }
 }
 
 //funcion principal main
@@ -360,10 +367,14 @@ int main () {
                 condicional
             );
         }
-        mensjes(notas[i]);
+
+        printf("\n");
+        mensjes(notas[i], condicional);
         puntos=0;
         creditos=0;
         condicional=0;
+        printf("\n\n");
+
     }
 
     return 0;
