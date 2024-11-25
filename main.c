@@ -201,7 +201,7 @@ int main () {
     struct registroEstudiante estudiantes[8];
     struct registroNotas notas[8][4];
     struct registroAsignaturas asignaturas[59];
-    int vectorCreditos[8][4][6], totalCreditos[8][4], totalPuntos[8][4];
+    int vectorCreditos[8][4][6], totalCreditos[8][4], totalPuntos[8][4], puntos=0, creditos=0;
     float indice[8][4];
     
     //prueba de cooncepto
@@ -239,19 +239,25 @@ int main () {
         printf("%12s %10s %10s %10s %10s %10s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
         for(int j=0; j<4; j++){
             //creditos del semestre
-            totalCreditos[i][j] = calcularCreditos(asignaturas, notas[i][j].codigoAsignatura, vectorCreditos[8][4]);
+            creditos += calcularCreditos(asignaturas, notas[i][j].codigoAsignatura, vectorCreditos[8][4]);
+            //totalCreditos[i][j] = calcularCreditos(asignaturas, notas[i][j].codigoAsignatura, vectorCreditos[8][4]);
             //puntos del semestre
-            totalPuntos[i][j] = sumatoriaPuntos(notas[i][j].notas);
+            puntos += sumatoriaPuntos(notas[i][j].notas);
+            //totalPuntos[i][j] = sumatoriaPuntos(notas[i][j].notas);
+            //indice
+
 
             printf("%12d %10d %10d %10d %10s %10s \n", 
                 notas[i][j].año, 
                 notas[i][j].semestre,  
-                totalPuntos[i][j], 
-                totalCreditos[i][j], 
+                puntos, 
+                creditos, 
                 "Índice", 
                 "Condicional"
             );
         }
+        puntos=0;
+        creditos=0;
     }
 
     return 0;
