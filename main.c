@@ -256,13 +256,22 @@ char numerosRomanos(int numero){
     return letra;
 }
 
+//calculo condicional
+int calculoCondicional(float indice, int condicional){
+    if(indice<1){
+        return condicional++;
+    }else{
+        return condicional;
+    }
+}
+
 //funcion principal main
 int main () {
     //defincion de variables
     struct registroEstudiante estudiantes[8];
     struct registroNotas notas[8][4];
     struct registroAsignaturas asignaturas[59];
-    int vectorCreditos[8][4][6]={0}, totalCreditos[8][4], totalPuntos[8][4], puntos=0, creditos=0;
+    int vectorCreditos[8][4][6]={0}, totalCreditos[8][4], totalPuntos[8][4], puntos=0, creditos=0, condicional=0;
     float indice[8][4];
     
     //prueba de cooncepto
@@ -309,22 +318,29 @@ int main () {
 
             //totalPuntos[i][j] = sumatoriaPuntos(notas[i][j].notas);
             //indice
+            indice[i][j] = (float)puntos/(float)creditos;
 
             // printf("Creditos acumulados: %d \n", creditos);
             // printf("Creditos acumulados: %d \n", puntos);
             //printf("Valor de J: %d \n", j);
 
-            printf("%12d %10d %10d %10d %10s %10s \n", 
+            //Índice = PUNTOS / total de créditos
+            if(indice[i][j]<1.00){
+                condicional++;
+            }
+
+            printf("%12d %10d %10d %10d %10.2f %10d \n", 
                 notas[i][j].año, 
                 j,  
                 puntos, 
                 creditos, 
-                "Índice", 
-                "Condicional"
+                indice[i][j], 
+                condicional
             );
         }
         puntos=0;
         creditos=0;
+        condicional=0;
     }
 
     return 0;
