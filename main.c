@@ -118,7 +118,7 @@ int sumatoriaPuntos(char notas[6]){
 
     //Verificacion de la nota para la sumatoria
     for(int i = 0; i < 6; i ++){
-        printf("Nota: %c \n", notas[i]);
+        //printf("Nota: %c \n", notas[i]);
         if(notas[i] == 'A'){
             sumatoria += 3;
         }
@@ -146,7 +146,7 @@ void calcularIndice(int creditos[6], int totalCreditos)
     //PARA QUE LA VARIABLE VALOR TENGA SU NÚMERO
     for(int i = 0; i < 6; i ++){
         printf("Ingrese su nota: ");
-        scanf(" %c", &nota[i]);
+        //scanf(" %c", &nota[i]);
         if(nota[i] == 'A'){
             valor[i] = valor[i] + 3;
         }
@@ -172,6 +172,27 @@ void calcularIndice(int creditos[6], int totalCreditos)
     printf("Su indice es de : %.2f\n", indice);
 }
 
+//funcion para calcular total de creditos
+int calcularCreditos(struct registroAsignaturas asignaturas[59], char codigoAsignaturas[6][6]){
+    printf("Calculo de total de creditos de un semestre ***************** \n");
+    int creditos=0, contador=0;
+    for (int i = 0; i < 6; i++){
+        if(codigoAsignaturas[i]!="     0"){
+            // printf("%s \n", codigoAsignaturas[i]);
+            while (contador < 59){
+                printf("%s - %s\n", asignaturas[contador].codigoAsignatura, codigoAsignaturas[i]);
+                if(asignaturas[contador].codigoAsignatura==codigoAsignaturas[i]){
+                    printf("bingo ******** \n");
+                    creditos += asignaturas[contador].creditos;
+                    contador=59;
+                }
+                contador++;
+            }
+            contador=0;
+        }
+    }
+    return creditos;
+}
 
 //funcion principal main
 int main () {
@@ -193,28 +214,39 @@ int main () {
 
 
     //calcular sumatoria de puntos
-    int sumatoria = sumatoriaPuntos(notas[0][0].notas);
-    printf("%d", sumatoria);
+    //int sumatoria = sumatoriaPuntos(notas[0][0].notas);
+    //printf("%d \n", sumatoria);
+
+    //Calcular total de creditos
+    totalCreditos[0] = calcularCreditos(asignaturas, notas[0][0].codigoAsignatura);
+    printf("%d \n", totalCreditos[0]);
 
 
     //calcular el incide
     // calcularIndice(creditos, totalCreditos);
 
     //Impresion de datos
-    printf("Imprimir datos");
-    for(int i=0; i<8;i++){
+    // printf("Imprimir datos");
+    // for(int i=0; i<8;i++){
 
-        //datos del estuante
-        printf("Cedula del estudiante \n");
-        printf("Nombre del estudiante \n");
+    //     //datos del estuante
+    //     printf("%s\n", estudiantes[i].cedula);
+    //     printf("%s\n", estudiantes[i].nombre);
 
-        //Imprimir los datos
-        //encabezado
-        printf("%10s %10s %10s %10s %10s %10s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
-        for(int j=0; j<4; j++){
-            printf("%10s %10s %10s %10s %10s %10s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
-        }
-    }
+    //     //Imprimir los datos
+    //     //encabezado
+    //     //notas[8][4]
+    //     // struct registroNotas {
+    //     //     int año;
+    //     //     int semestre;
+    //     //     char codigoAsignatura[6][6];
+    //     //     char notas[6];
+    //     // };
+    //     printf("%12s %10s %10s %10s %10s %10s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
+    //     for(int j=0; j<4; j++){
+    //         printf("%12d %10d %10s %10s %10s %10s \n", notas[i][j].año, notas[i][j].semestre, "Puntos", "Total/Cr", "Índice", "Condicional");
+    //     }
+    // }
 
     return 0;
 }
