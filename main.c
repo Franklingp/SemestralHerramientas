@@ -329,7 +329,7 @@ int main () {
                 condicional++;
             }
 
-            printf("%12d %10d %10d %10d %10.2f %10d \n", 
+            printf("%7d %10d %14d %7d %11.2f %7d \n", 
                 notas[i][j].año, 
                 j,  
                 puntos, 
