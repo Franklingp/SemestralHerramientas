@@ -19,7 +19,7 @@ struct registroEstudiante {
 struct registroNotas {
     int año;
     int semestre;
-    char codigoAsignatura[6][6];
+    int codigoAsignatura[6];
     char notas[6];
 };
 
@@ -28,7 +28,7 @@ struct registroNotas {
 struct registroAsignaturas {
     int semestre;
     int añoAcademico;
-    char codigoAsignatura[6];
+    int codigoAsignatura;
     int creditos;
     char status;
     char nombreAsignatura[50];
@@ -43,10 +43,10 @@ void leerArchivoAsignatura(struct registroAsignaturas asignaturas[59]){
     // while(!(feof(archivoAignaturas)))
     while(contador<58){
         //ESTO ES PARA IMPRIMIR TODAS LAS ASIGNATURAS
-        fscanf(archivoAsignaturas, "%d %d %s %c %d %[^\n]\n", 
+        fscanf(archivoAsignaturas, "%d %d %d %c %d %[^\n]\n", 
             &asignaturas[contador].añoAcademico, 
             &asignaturas[contador].semestre, 
-            asignaturas[contador].codigoAsignatura,
+            &asignaturas[contador].codigoAsignatura,
             &asignaturas[contador].status,
             &asignaturas[contador].creditos,
             asignaturas[contador].nombreAsignatura);
@@ -94,13 +94,13 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
 
             //lectura de notas
             for(int j=0; j<auxiliarSemestre; j++){  //auxiliarSemestre
-                fscanf(registroNotas, "%s %c \n", 
-                    notas[contadorEstudiante][i].codigoAsignatura[j], 
+                fscanf(registroNotas, "%d %c \n", 
+                    &notas[contadorEstudiante][i].codigoAsignatura[j], 
                     &notas[contadorEstudiante][i].notas[j]
                 );
-                // printf("%s %c \n", 
-                    // notas[contadorEstudiante][i].codigoAsignatura[j], 
-                    // notas[contadorEstudiante][i].notas[j]
+                // printf("%d %c \n", 
+                //     notas[contadorEstudiante][i].codigoAsignatura[j], 
+                //     notas[contadorEstudiante][i].notas[j]
                 // );
             }
         }
@@ -173,16 +173,16 @@ void calcularIndice(int creditos[6], int totalCreditos)
 }
 
 //funcion para calcular total de creditos
-int calcularCreditos(struct registroAsignaturas asignaturas[59], char codigoAsignaturas[6][6]){
+int calcularCreditos(struct registroAsignaturas asignaturas[59], int codigoAsignaturas[6]){
     printf("Calculo de total de creditos de un semestre ***************** \n");
     int creditos=0, contador=0;
     for (int i = 0; i < 6; i++){
-        if(codigoAsignaturas[i]!="     0"){
+        if(codigoAsignaturas[i]!=0){
             // printf("%s \n", codigoAsignaturas[i]);
             while (contador < 59){
-                printf("%s - %s\n", asignaturas[contador].codigoAsignatura, codigoAsignaturas[i]);
                 if(asignaturas[contador].codigoAsignatura==codigoAsignaturas[i]){
                     printf("bingo ******** \n");
+                    printf("%s %d %d \n",asignaturas[contador].nombreAsignatura, asignaturas[contador].codigoAsignatura, asignaturas[contador].creditos);
                     creditos += asignaturas[contador].creditos;
                     contador=59;
                 }
