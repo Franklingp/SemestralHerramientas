@@ -230,6 +230,32 @@ int sumatoriaCreditos(int vectorCreditos[6]){
     return sumatoria;
 }
 
+//Funcion para Pasar los semestres a numeros Romanos
+char numerosRomanos(int numero){
+    char letra[3];
+
+    if(numero==0){
+       letra[0] = 'I';
+    }else{
+        letra[0] = 'I';
+        if(numero==1){
+            letra[1] = 'I';
+        }else{
+            letra[1] = 'I';
+            if(numero==2){
+                letra[2] = 'I';
+            }else{
+                if(numero==3){
+                   letra[1] = 'V';
+                }else{
+                    letra[0] = 'V';
+                }
+            }
+        }
+    }
+    return letra;
+}
+
 //funcion principal main
 int main () {
     //defincion de variables
@@ -286,10 +312,11 @@ int main () {
 
             // printf("Creditos acumulados: %d \n", creditos);
             // printf("Creditos acumulados: %d \n", puntos);
+            //printf("Valor de J: %d \n", j);
 
             printf("%12d %10d %10d %10d %10s %10s \n", 
                 notas[i][j].año, 
-                notas[i][j].semestre,  
+                j,  
                 puntos, 
                 creditos, 
                 "Índice", 
