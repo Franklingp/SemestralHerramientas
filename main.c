@@ -231,38 +231,60 @@ int sumatoriaCreditos(int vectorCreditos[6]){
 }
 
 //Funcion para Pasar los semestres a numeros Romanos
-char numerosRomanos(int numero){
-    char letra[3];
+// char numerosRomanos(int numero){
+//     char letra[3];
 
-    if(numero==0){
-       letra[0] = 'I';
-    }else{
-        letra[0] = 'I';
-        if(numero==1){
-            letra[1] = 'I';
-        }else{
-            letra[1] = 'I';
-            if(numero==2){
-                letra[2] = 'I';
-            }else{
-                if(numero==3){
-                   letra[1] = 'V';
-                }else{
-                    letra[0] = 'V';
-                }
+//     if(numero==0){
+//        letra[0] = 'I';
+//     }else{
+//         letra[0] = 'I';
+//         if(numero==1){
+//             letra[1] = 'I';
+//         }else{
+//             letra[1] = 'I';
+//             if(numero==2){
+//                 letra[2] = 'I';
+//             }else{
+//                 if(numero==3){
+//                    letra[1] = 'V';
+//                 }else{
+//                     letra[0] = 'V';
+//                 }
+//             }
+//         }
+//     }
+//     return letra;
+// }
+
+//mensajes
+void mensjes(struct registroNotas notas[4]){
+    int contadorF = 0;
+    int contadorD = 0;
+
+    for(int i=0; i<4; i++){
+        for(int j=0; j<6; j++){
+            
+            if(notas[i].notas[j]=='F'){
+                contadorF++;
+            }
+            if(notas[i].notas[j]=='D'){
+                contadorD++;
             }
         }
     }
-    return letra;
-}
 
-//calculo condicional
-int calculoCondicional(float indice, int condicional){
-    if(indice<1){
-        return condicional++;
-    }else{
-        return condicional;
+    if(contadorF>0){
+        printf("HA OBTENIDO F COMO CALIFICACIÓN, RECUERDE QUE SI TIENE 3 Fs CONSECUTIVAS, DEBE CAMBIARSE A UNA CARRERA DONDE NO EXISTA ESTE CÓDIGO");
     }
+    if(contadorD>0){
+        printf("HA OBTENIDO D COMO CALIFICACIÓN, RECUERDE QUE TIENE TRES OPCIONES: \n"); 
+        printf("1.	SI LA MATERIA ES FUNDAMENTAL, DEBE REPETIR LA MISMA. \n"); 
+        printf("2.	SI LA MATERIA NO ES FUNDAMENTAL Y LA HA RECIBIDO UN SOLA VEZ, PUEDE DEJARLA ASÍ \n"); 
+        printf("3.	SI LA MATERIA NO ES FUNDAMENTAL PERO HA OBTENIDO UNA F PREVIA, DEBE REPETIR LA MISMA YA QUE UNA D NO TAPA UNA F \n"); 
+    }
+
+         
+
 }
 
 //funcion principal main
@@ -338,6 +360,7 @@ int main () {
                 condicional
             );
         }
+        mensjes(notas[i]);
         puntos=0;
         creditos=0;
         condicional=0;
