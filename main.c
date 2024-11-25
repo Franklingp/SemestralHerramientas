@@ -113,7 +113,7 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
 
 //Funcion para calcular los puntos totales por asignacion
 int sumatoriaPuntos(char notas[6]){
-    printf("Sumatoria ***** \n");
+    //printf("Sumatoria ***** \n");
     int sumatoria=0;
 
     //Verificacion de la nota para la sumatoria
@@ -174,15 +174,15 @@ void calcularIndice(int creditos[6], int totalCreditos)
 
 //funcion para calcular total de creditos
 int calcularCreditos(struct registroAsignaturas asignaturas[59], int codigoAsignaturas[6]){
-    printf("Calculo de total de creditos de un semestre ***************** \n");
+    //printf("Calculo de total de creditos de un semestre ***************** \n");
     int creditos=0, contador=0;
     for (int i = 0; i < 6; i++){
         if(codigoAsignaturas[i]!=0){
             // printf("%s \n", codigoAsignaturas[i]);
             while (contador < 59){
                 if(asignaturas[contador].codigoAsignatura==codigoAsignaturas[i]){
-                    printf("bingo ******** \n");
-                    printf("%s %d %d \n",asignaturas[contador].nombreAsignatura, asignaturas[contador].codigoAsignatura, asignaturas[contador].creditos);
+                    //printf("bingo ******** \n");
+                    //printf("%s %d %d \n",asignaturas[contador].nombreAsignatura, asignaturas[contador].codigoAsignatura, asignaturas[contador].creditos);
                     creditos += asignaturas[contador].creditos;
                     contador=59;
                 }
@@ -200,8 +200,8 @@ int main () {
     struct registroEstudiante estudiantes[8];
     struct registroNotas notas[8][4];
     struct registroAsignaturas asignaturas[59];
-    int totalCreditos[8], totalPuntos[8];
-    float indice[8];
+    int totalCreditos[8][4], totalPuntos[8][4];
+    float indice[8][4];
     
     //prueba de cooncepto
     printf("Inicio del semestral \n");
@@ -218,35 +218,38 @@ int main () {
     //printf("%d \n", sumatoria);
 
     //Calcular total de creditos
-    totalCreditos[0] = calcularCreditos(asignaturas, notas[0][0].codigoAsignatura);
-    printf("%d \n", totalCreditos[0]);
+    // totalCreditos[0][0] = calcularCreditos(asignaturas, notas[0][0].codigoAsignatura);
+    // printf("%d \n",  totalCreditos[0][0]);
 
 
     //calcular el incide
     // calcularIndice(creditos, totalCreditos);
 
     //Impresion de datos
-    // printf("Imprimir datos");
-    // for(int i=0; i<8;i++){
+    printf("Imprimir datos");
+    for(int i=0; i<8;i++){
 
-    //     //datos del estuante
-    //     printf("%s\n", estudiantes[i].cedula);
-    //     printf("%s\n", estudiantes[i].nombre);
+        //datos del estuante
+        printf("%s\n", estudiantes[i].cedula);
+        printf("%s\n", estudiantes[i].nombre);
 
-    //     //Imprimir los datos
-    //     //encabezado
-    //     //notas[8][4]
-    //     // struct registroNotas {
-    //     //     int año;
-    //     //     int semestre;
-    //     //     char codigoAsignatura[6][6];
-    //     //     char notas[6];
-    //     // };
-    //     printf("%12s %10s %10s %10s %10s %10s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
-    //     for(int j=0; j<4; j++){
-    //         printf("%12d %10d %10s %10s %10s %10s \n", notas[i][j].año, notas[i][j].semestre, "Puntos", "Total/Cr", "Índice", "Condicional");
-    //     }
-    // }
+        //Imprimir los datos
+        //encabezado
+        printf("%12s %10s %10s %10s %10s %10s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
+        for(int j=0; j<4; j++){
+            //creditos del semestre
+            totalCreditos[i][j] = calcularCreditos(asignaturas, notas[i][j].codigoAsignatura);
+            //puntos del semestre
+            totalPuntos[i][j] = sumatoriaPuntos(notas[i][j].notas);
+
+            printf("%12d %10d %10d %10d %10s %10s \n", 
+                notas[i][j].año, notas[i][j].semestre,  
+                totalPuntos[i][j], totalCreditos[i][j], 
+                "Índice", 
+                "Condicional"
+            );
+        }
+    }
 
     return 0;
 }
