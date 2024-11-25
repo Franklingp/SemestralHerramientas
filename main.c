@@ -173,7 +173,7 @@ void calcularIndice(int creditos[6], int totalCreditos)
 }
 
 //funcion para calcular total de creditos
-int calcularCreditos(struct registroAsignaturas asignaturas[59], int codigoAsignaturas[6]){
+int calcularCreditos(struct registroAsignaturas asignaturas[59], int codigoAsignaturas[6], int vectorCreditos[6]){
     //printf("Calculo de total de creditos de un semestre ***************** \n");
     int creditos=0, contador=0;
     for (int i = 0; i < 6; i++){
@@ -184,6 +184,7 @@ int calcularCreditos(struct registroAsignaturas asignaturas[59], int codigoAsign
                     //printf("bingo ******** \n");
                     //printf("%s %d %d \n",asignaturas[contador].nombreAsignatura, asignaturas[contador].codigoAsignatura, asignaturas[contador].creditos);
                     creditos += asignaturas[contador].creditos;
+                    vectorCreditos[i] = asignaturas[contador].creditos;
                     contador=59;
                 }
                 contador++;
@@ -200,7 +201,7 @@ int main () {
     struct registroEstudiante estudiantes[8];
     struct registroNotas notas[8][4];
     struct registroAsignaturas asignaturas[59];
-    int totalCreditos[8][4], totalPuntos[8][4];
+    int vectorCreditos[8][4][6], totalCreditos[8][4], totalPuntos[8][4];
     float indice[8][4];
     
     //prueba de cooncepto
@@ -238,13 +239,15 @@ int main () {
         printf("%12s %10s %10s %10s %10s %10s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
         for(int j=0; j<4; j++){
             //creditos del semestre
-            totalCreditos[i][j] = calcularCreditos(asignaturas, notas[i][j].codigoAsignatura);
+            totalCreditos[i][j] = calcularCreditos(asignaturas, notas[i][j].codigoAsignatura, vectorCreditos[8][4]);
             //puntos del semestre
             totalPuntos[i][j] = sumatoriaPuntos(notas[i][j].notas);
 
             printf("%12d %10d %10d %10d %10s %10s \n", 
-                notas[i][j].año, notas[i][j].semestre,  
-                totalPuntos[i][j], totalCreditos[i][j], 
+                notas[i][j].año, 
+                notas[i][j].semestre,  
+                totalPuntos[i][j], 
+                totalCreditos[i][j], 
                 "Índice", 
                 "Condicional"
             );
