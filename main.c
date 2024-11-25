@@ -98,10 +98,10 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
                     &notas[contadorEstudiante][i].codigoAsignatura[j], 
                     &notas[contadorEstudiante][i].notas[j]
                 );
-                printf("%d %c \n", 
-                    notas[contadorEstudiante][i].codigoAsignatura[j], 
-                    notas[contadorEstudiante][i].notas[j]
-                );
+                // printf("%d %c \n", 
+                //     notas[contadorEstudiante][i].codigoAsignatura[j], 
+                //     notas[contadorEstudiante][i].notas[j]
+                // );
             }
         }
         contadorEstudiante++;
@@ -118,10 +118,10 @@ int sumatoriaPuntos(char notas[6], int creditos[6]){
 
     //Verificacion de la nota para la sumatoria
     for(int i = 0; i < 6; i ++){
-        printf("Nota: %c \n", notas[i]);
-        printf("Creditos: %d \n", creditos[i]);
+        // printf("Nota: %c \n", notas[i]);
+        // printf("Creditos: %d \n", creditos[i]);
         if(notas[i] == 'A'){
-            printf("Entra en A con %c \n", notas[i]);
+            // printf("Entra en A con %c \n", notas[i]);
             sumatoria = sumatoria + (3 * creditos[i]);
         }
             else if(notas[i] == 'B'){
@@ -134,7 +134,7 @@ int sumatoriaPuntos(char notas[6], int creditos[6]){
                         sumatoria += 0;
                     }
     }
-    printf("Sumatoria: %d \n", sumatoria);
+    // printf("Sumatoria: %d \n", sumatoria);
     return sumatoria;
 }
 
@@ -279,21 +279,22 @@ int main () {
 
             //totalCreditos[i][j] = calcularCreditos(asignaturas, notas[i][j].codigoAsignatura, vectorCreditos[8][4]);
             //puntos del semestre
-            //puntos += sumatoriaPuntos(notas[i][j].notas, vectorCreditos[i][j]);
+            puntos += sumatoriaPuntos(notas[i][j].notas, vectorCreditos[i][j]);
 
             //totalPuntos[i][j] = sumatoriaPuntos(notas[i][j].notas);
             //indice
 
-            printf("Creditos acumulados: %d \n", creditos);
+            // printf("Creditos acumulados: %d \n", creditos);
+            // printf("Creditos acumulados: %d \n", puntos);
 
-            // printf("%12d %10d %10d %10d %10s %10s \n", 
-            //     notas[i][j].año, 
-            //     notas[i][j].semestre,  
-            //     puntos, 
-            //     creditos, 
-            //     "Índice", 
-            //     "Condicional"
-            // );
+            printf("%12d %10d %10d %10d %10s %10s \n", 
+                notas[i][j].año, 
+                notas[i][j].semestre,  
+                puntos, 
+                creditos, 
+                "Índice", 
+                "Condicional"
+            );
         }
         puntos=0;
         creditos=0;
