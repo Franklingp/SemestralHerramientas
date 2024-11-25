@@ -294,6 +294,16 @@ void mensjes(struct registroNotas notas[4], int condicionales){
     }
 }
 
+void imprimirEncabezado() {
+    printf("\t        UNIVERSIDAD TECNOLÓGICA DE PANAMÁ\n");
+    printf("\t\t   CENTRO REGIONAL DE CHIRIQUÍ\n"); 
+    printf("\tFACULTAD DE INGENIERÍA DE SISTEMAS COMPUTACIONALES\n");
+    printf("\tLICENCIATURA EN IGENIERÍA DE SISTEMAS Y COMPUTACIÓN\n\n");
+    printf("\t\t   REPORTE ACADÉMICO DE ESTUDIANTES\n\n"); 
+    printf("NOMBRE DEL ESTUDIANTE: Kelidy Jimenez Miranda     GRUPO: 2IL112\n");
+    printf("CÉDULA DEL ESTUDIANTE: 4-830-283\n\n");
+}
+
 //funcion principal main
 int main () {
     //defincion de variables
@@ -303,19 +313,11 @@ int main () {
     int vectorCreditos[8][4][6]={0}, totalCreditos[8][4], totalPuntos[8][4], puntos=0, creditos=0, condicional=0;
     float indice[8][4];
     
-    //prueba de cooncepto
-    printf("Inicio del semestral \n");
-
     //lectura de archivos 
     leerArchivoAsignatura(asignaturas);
 
     //lectura de notas
     leerArchivoNotas(notas, estudiantes);
-
-
-    //calcular sumatoria de puntos
-    //int sumatoria = sumatoriaPuntos(notas[0][0].notas);
-    //printf("%d \n", sumatoria);
 
     //Calcular total de creditos
     calcularCreditos(asignaturas, notas, vectorCreditos);
@@ -325,8 +327,9 @@ int main () {
     //calcular el incide
     // calcularIndice(creditos, totalCreditos);
 
+    imprimirEncabezado();
+
     //Impresion de datos
-    printf("Imprimir datos");
     for(int i=0; i<8;i++){
 
         //datos del estuante
