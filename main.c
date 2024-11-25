@@ -98,10 +98,10 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
                     &notas[contadorEstudiante][i].codigoAsignatura[j], 
                     &notas[contadorEstudiante][i].notas[j]
                 );
-                // printf("%d %c \n", 
-                //     notas[contadorEstudiante][i].codigoAsignatura[j], 
-                //     notas[contadorEstudiante][i].notas[j]
-                // );
+                printf("%d %c \n", 
+                    notas[contadorEstudiante][i].codigoAsignatura[j], 
+                    notas[contadorEstudiante][i].notas[j]
+                );
             }
         }
         contadorEstudiante++;
@@ -112,27 +112,29 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
 
 
 //Funcion para calcular los puntos totales por asignacion
-int sumatoriaPuntos(char notas[6]){
+int sumatoriaPuntos(char notas[6], int creditos[6]){
     //printf("Sumatoria ***** \n");
     int sumatoria=0;
 
     //Verificacion de la nota para la sumatoria
     for(int i = 0; i < 6; i ++){
-        //printf("Nota: %c \n", notas[i]);
+        printf("Nota: %c \n", notas[i]);
+        printf("Creditos: %d \n", creditos[i]);
         if(notas[i] == 'A'){
-            sumatoria += 3;
+            printf("Entra en A con %c \n", notas[i]);
+            sumatoria = sumatoria + (3 * creditos[i]);
         }
             else if(notas[i] == 'B'){
-                sumatoria += 2;
+                sumatoria = sumatoria + (2 * creditos[i]);
             }
                 else if(notas[i] == 'C'){
-                    sumatoria += 1;
+                    sumatoria = sumatoria + (1 * creditos[i]);
                 }
                     else {
                         sumatoria += 0;
                     }
     }
-
+    printf("Sumatoria: %d \n", sumatoria);
     return sumatoria;
 }
 
@@ -172,27 +174,60 @@ void calcularIndice(int creditos[6], int totalCreditos)
     printf("Su indice es de : %.2f\n", indice);
 }
 
-//funcion para calcular total de creditos
-int calcularCreditos(struct registroAsignaturas asignaturas[59], int codigoAsignaturas[6], int vectorCreditos[6]){
+//funcion para calcular un vector de creditos
+void calcularCreditos(struct registroAsignaturas asignaturas[59], struct registroNotas notas[8][4], int vectorCreditos[8][4][6]){
     //printf("Calculo de total de creditos de un semestre ***************** \n");
-    int creditos=0, contador=0;
-    for (int i = 0; i < 6; i++){
-        if(codigoAsignaturas[i]!=0){
-            // printf("%s \n", codigoAsignaturas[i]);
-            while (contador < 59){
-                if(asignaturas[contador].codigoAsignatura==codigoAsignaturas[i]){
-                    //printf("bingo ******** \n");
-                    //printf("%s %d %d \n",asignaturas[contador].nombreAsignatura, asignaturas[contador].codigoAsignatura, asignaturas[contador].creditos);
-                    creditos += asignaturas[contador].creditos;
-                    vectorCreditos[i] = asignaturas[contador].creditos;
-                    contador=59;
-                }
-                contador++;
+    int creditos=0, contador=0, estudiante=0, auxiliar=0;
+    //ciclo para estudiante
+    for(estudiante = 0; estudiante<8 ; estudiante++){
+        //Ciclo para semestre
+        for(int semestre = 0; semestre < 4; semestre++){
+            //ciclo para asignatura
+            if(notas[8][4].semestre==0){
+                auxiliar=2;
+            }else{
+                auxiliar=6;
             }
-            contador=0;
+            for (int i = 0; i < 6; i++){
+                if(notas[estudiante][semestre].codigoAsignatura[i]!=0){
+                    // printf("%s \n", codigoAsignaturas[i]);
+                    while (contador < 59){
+                        if(asignaturas[contador].codigoAsignatura==notas[estudiante][semestre].codigoAsignatura[i]){
+                            //printf("bingo ******** \n");
+                            //printf("%s %d %d \n",asignaturas[contador].nombreAsignatura, asignaturas[contador].codigoAsignatura, asignaturas[contador].creditos);
+                            vectorCreditos[estudiante][semestre][i] = asignaturas[contador].creditos;
+                            contador=59;
+                        }
+                        contador++;
+                    }
+                    contador=0;
+                }
+                //parche
+                // if(vectorCreditos[estudiante][semestre][i]>90){
+                //     printf("Prueba********** \n");
+                //     printf("vector de creditos: %d \n", vectorCreditos[estudiante][semestre][i]);
+                //     printf("Codigo en Asignatura: %d \n", asignaturas[contador].codigoAsignatura);
+                //     printf("codigo en notas: %d \n", notas[estudiante][semestre].codigoAsignatura[i]);
+                //     printf("Creditos en asignatura: %d \n", asignaturas[contador].creditos);
+                //     printf("estudiante : %d, semestre: %d, i que seria la materia: %d, contador de asignatura : %d\n",
+                //         estudiante, 
+                //         semestre, 
+                //         i, contador
+                //     );
+                //     //vectorCreditos[estudiante][semestre][i] = 6;
+                // }
+            }
         }
     }
-    return creditos;
+}
+
+//sumatoria de creditos
+int sumatoriaCreditos(int vectorCreditos[6]){
+    int sumatoria = 0;
+    for(int i = 0; i < 6; i++){
+        sumatoria += vectorCreditos[i];
+    }
+    return sumatoria;
 }
 
 //funcion principal main
@@ -201,7 +236,7 @@ int main () {
     struct registroEstudiante estudiantes[8];
     struct registroNotas notas[8][4];
     struct registroAsignaturas asignaturas[59];
-    int vectorCreditos[8][4][6], totalCreditos[8][4], totalPuntos[8][4], puntos=0, creditos=0;
+    int vectorCreditos[8][4][6]={0}, totalCreditos[8][4], totalPuntos[8][4], puntos=0, creditos=0;
     float indice[8][4];
     
     //prueba de cooncepto
@@ -219,7 +254,7 @@ int main () {
     //printf("%d \n", sumatoria);
 
     //Calcular total de creditos
-    // totalCreditos[0][0] = calcularCreditos(asignaturas, notas[0][0].codigoAsignatura);
+    calcularCreditos(asignaturas, notas, vectorCreditos);
     // printf("%d \n",  totalCreditos[0][0]);
 
 
@@ -239,22 +274,26 @@ int main () {
         printf("%12s %10s %10s %10s %10s %10s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
         for(int j=0; j<4; j++){
             //creditos del semestre
-            creditos += calcularCreditos(asignaturas, notas[i][j].codigoAsignatura, vectorCreditos[8][4]);
+            //creditos += calcularCreditos(asignaturas, notas[i][j].codigoAsignatura, vectorCreditos);
+            creditos += sumatoriaCreditos(vectorCreditos[i][j]);
+
             //totalCreditos[i][j] = calcularCreditos(asignaturas, notas[i][j].codigoAsignatura, vectorCreditos[8][4]);
             //puntos del semestre
-            puntos += sumatoriaPuntos(notas[i][j].notas);
+            //puntos += sumatoriaPuntos(notas[i][j].notas, vectorCreditos[i][j]);
+
             //totalPuntos[i][j] = sumatoriaPuntos(notas[i][j].notas);
             //indice
 
+            printf("Creditos acumulados: %d \n", creditos);
 
-            printf("%12d %10d %10d %10d %10s %10s \n", 
-                notas[i][j].año, 
-                notas[i][j].semestre,  
-                puntos, 
-                creditos, 
-                "Índice", 
-                "Condicional"
-            );
+            // printf("%12d %10d %10d %10d %10s %10s \n", 
+            //     notas[i][j].año, 
+            //     notas[i][j].semestre,  
+            //     puntos, 
+            //     creditos, 
+            //     "Índice", 
+            //     "Condicional"
+            // );
         }
         puntos=0;
         creditos=0;
