@@ -238,8 +238,8 @@ void imprimirEncabezado() {
     printf("\tFACULTAD DE INGENIERÍA DE SISTEMAS COMPUTACIONALES\n");
     printf("\tLICENCIATURA EN IGENIERÍA DE SISTEMAS Y COMPUTACIÓN\n\n");
     printf("\t\t   REPORTE ACADÉMICO DE ESTUDIANTES\n\n"); 
-    printf("NOMBRE DEL ESTUDIANTE: Kelidy Jimenez Miranda     GRUPO: 2IL112\n");
-    printf("CÉDULA DEL ESTUDIANTE: 4-830-283\n\n");
+    printf("NOMBRE DE LOS ESTUDIANTES: Franklin Pimentel; Samuel Henao     GRUPO: 2IL111\n");
+    printf("CÉDULAS: 20-70-8197; 20-14-8312 \n\n");
 }
 
 //funcion principal main
