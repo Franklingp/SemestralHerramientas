@@ -321,7 +321,7 @@ int main () {
             //Nmeros romanos para semestre;
             numerosRomanos(notas[i][j].semestre, numeroRomano);
 
-            fprintf(ProyectoFinal, "%7d %15s %18d %12d %18.2f %7d \n", 
+            fprintf(ProyectoFinal, "%7d %19s %25d %16d %20.2f %9d \n", 
                 notas[i][j].año, 
                 numeroRomano,  
                 puntos, 
