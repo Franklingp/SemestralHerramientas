@@ -195,12 +195,12 @@ void imprimirEncabezado() {
 //Numeros romanos
 char numerosRomanos(int semestre, char romano[2]){
     if(semestre==0){
-        romano[0]='0';
-        romano[1]=' ';
+        romano[0]=' ';
+        romano[1]='0';
     }
     if(semestre==1){
-        romano[0]='I';
-        romano[1]=' ';
+        romano[0]=' ';
+        romano[1]='I';
     }
     if(semestre==2){
         romano[0]='I';
@@ -249,7 +249,7 @@ int main () {
 
             numerosRomanos(notas[i][j].semestre, numeroRomano);
 
-            fprintf(ProyectoFinal, "%7d %19s %25d %16d %20.2f %9d \n", 
+            fprintf(ProyectoFinal, "%10d %16s %17d %15d %14.2f %10d \n",
                 notas[i][j].año, 
                 numeroRomano,  
                 puntos, 
