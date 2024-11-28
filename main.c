@@ -295,7 +295,7 @@ int main () {
                 condicional++;
             }
 
-            fprintf(ProyectoFinal, "%7d %15d %18d %12d %18.2f %7d \n", 
+            fprintf(ProyectoFinal, "%7d %18d %25d %16d %20.2f %9d \n", 
                 notas[i][j].año, 
                 j,  
                 puntos, 
