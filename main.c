@@ -234,14 +234,36 @@ void mensjes(struct registroNotas notas[4], int condicionales){
     }
 }
 
+//Imprimir el encabezado
 void imprimirEncabezado() {
-    fprintf(ProyectoFinal, "\t        UNIVERSIDAD TECNOLÓGICA DE PANAMÁ\n");
+    fprintf(ProyectoFinal, "\t     UNIVERSIDAD TECNOLÓGICA DE PANAMÁ\n");
     fprintf(ProyectoFinal, "\t\t   CENTRO REGIONAL DE CHIRIQUÍ\n"); 
     fprintf(ProyectoFinal, "\tFACULTAD DE INGENIERÍA DE SISTEMAS COMPUTACIONALES\n");
     fprintf(ProyectoFinal, "\tLICENCIATURA EN IGENIERÍA DE SISTEMAS Y COMPUTACIÓN\n\n");
     fprintf(ProyectoFinal, "\t\t   REPORTE ACADÉMICO DE ESTUDIANTES\n\n"); 
     fprintf(ProyectoFinal, "NOMBRE DE LOS ESTUDIANTES: Franklin Pimentel; Samuel Henao     GRUPO: 2IL111\n");
     fprintf(ProyectoFinal, "CÉDULAS: 20-70-8197; 20-14-8312 \n\n");
+}
+
+//Numeros romanos
+char numerosRomanos(int semestre, char romano[2]){
+    // printf("Impresion de numeros romanoooooooosssss \n");
+    // printf("El numero que estra es: %d \n", semestre);
+    if(semestre==0){
+        romano[0]='0';
+        romano[1]=' ';
+        // printf("Entro en 0 \n");
+    }
+    if(semestre==1){
+        romano[0]='I';
+        romano[1]=' ';
+        // printf("Entro en 1 \n");
+    }
+    if(semestre==2){
+        romano[0]='I';
+        romano[1]='I';
+        // printf("Entro en 2 \n");
+    }
 }
 
 //funcion principal main
@@ -252,6 +274,7 @@ int main () {
     struct registroAsignaturas asignaturas[59];
     int vectorCreditos[8][4][6]={0}, totalCreditos[8][4], totalPuntos[8][4], puntos=0, creditos=0, condicional=0;
     float indice[8][4];
+    char numeroRomano[2];
     
     //lectura de archivos 
     leerArchivoAsignatura(asignaturas);
@@ -295,17 +318,22 @@ int main () {
                 condicional++;
             }
 
-            fprintf(ProyectoFinal, "%7d %15d %18d %12d %18.2f %7d \n", 
+            //Nmeros romanos para semestre;
+            numerosRomanos(notas[i][j].semestre, numeroRomano);
+
+            fprintf(ProyectoFinal, "%7d %15s %18d %12d %18.2f %7d \n", 
                 notas[i][j].año, 
-                j,  
+                numeroRomano,  
                 puntos, 
                 creditos, 
                 indice[i][j], 
                 condicional
             );
         }
-
+        //Limpiando las variables
         fprintf(ProyectoFinal, "\n");
+        numeroRomano[0]=' ';
+        numeroRomano[1]=' ';
         mensjes(notas[i], condicional);
         puntos=0;
         creditos=0;
