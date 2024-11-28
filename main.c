@@ -1,9 +1,11 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
 
+
 //definicion de arvhivos
 FILE * archivoAsignaturas;
 FILE * registroNotas;
+FILE * ProyectoFinal;
 
 //variable global para saber cantidad de estudiantes
 int NUMERO_ESTUDIANTES=8;
@@ -212,34 +214,34 @@ void mensjes(struct registroNotas notas[4], int condicionales){
     }
 
     if(contadorF>0){
-        printf("HA OBTENIDO F COMO CALIFICACIÓN, RECUERDE QUE SI TIENE 3 Fs CONSECUTIVAS, DEBE CAMBIARSE A UNA CARRERA DONDE NO EXISTA ESTE CÓDIGO \n\n");
+        fprintf(ProyectoFinal, "HA OBTENIDO F COMO CALIFICACIÓN, RECUERDE QUE SI TIENE 3 Fs CONSECUTIVAS, DEBE CAMBIARSE A UNA CARRERA DONDE NO EXISTA ESTE CÓDIGO \n\n");
     }
     if(contadorD>0){
-        printf("HA OBTENIDO D COMO CALIFICACIÓN, RECUERDE QUE TIENE TRES OPCIONES: \n"); 
-        printf("1.	SI LA MATERIA ES FUNDAMENTAL, DEBE REPETIR LA MISMA. \n"); 
-        printf("2.	SI LA MATERIA NO ES FUNDAMENTAL Y LA HA RECIBIDO UN SOLA VEZ, PUEDE DEJARLA ASÍ \n"); 
-        printf("3.	SI LA MATERIA NO ES FUNDAMENTAL PERO HA OBTENIDO UNA F PREVIA, DEBE REPETIR LA MISMA YA QUE UNA D NO TAPA UNA F \n\n"); 
+        fprintf(ProyectoFinal, "HA OBTENIDO D COMO CALIFICACIÓN, RECUERDE QUE TIENE TRES OPCIONES: \n"); 
+        fprintf(ProyectoFinal, "1.	SI LA MATERIA ES FUNDAMENTAL, DEBE REPETIR LA MISMA. \n"); 
+        fprintf(ProyectoFinal, "2.	SI LA MATERIA NO ES FUNDAMENTAL Y LA HA RECIBIDO UN SOLA VEZ, PUEDE DEJARLA ASÍ \n"); 
+        fprintf(ProyectoFinal, "3.	SI LA MATERIA NO ES FUNDAMENTAL PERO HA OBTENIDO UNA F PREVIA, DEBE REPETIR LA MISMA YA QUE UNA D NO TAPA UNA F \n\n"); 
     }
 
     if(condicionales>=3){
-        printf("SU SITUACIÓN ES CRÍTICA, YA QUE DEBE HACER CAMBIO DE CARRERA, PORQUE HA ALCANZADO 3 CONDICIONALES \n\n"); 
+        fprintf(ProyectoFinal, "SU SITUACIÓN ES CRÍTICA, YA QUE DEBE HACER CAMBIO DE CARRERA, PORQUE HA ALCANZADO 3 CONDICIONALES \n\n"); 
     }else{
         if(condicionales>=2){
-            printf("HA ALCANZADO 2 CONDICIONALES, ES RECOMENDABLE MATRICULAR MATERIAS CON D y F PARA SUBIR EL ÍNDICE \n\n"); 
+            fprintf(ProyectoFinal, "HA ALCANZADO 2 CONDICIONALES, ES RECOMENDABLE MATRICULAR MATERIAS CON D y F PARA SUBIR EL ÍNDICE\n\n"); 
         }else if(condicionales>=1){
-            printf("TIENE UNA CONDICIONAL, TRATE DE SUBIR EL ÍNDICE ACADÉMICO.  ESTÁ A TIEMPO\n\n"); 
+            fprintf(ProyectoFinal, "TIENE UNA CONDICIONAL, TRATE DE SUBIR EL ÍNDICE ACADÉMICO.  ESTÁ A TIEMPO \n\n"); 
         }
     }
 }
 
 void imprimirEncabezado() {
-    printf("\t        UNIVERSIDAD TECNOLÓGICA DE PANAMÁ\n");
-    printf("\t\t   CENTRO REGIONAL DE CHIRIQUÍ\n"); 
-    printf("\tFACULTAD DE INGENIERÍA DE SISTEMAS COMPUTACIONALES\n");
-    printf("\tLICENCIATURA EN IGENIERÍA DE SISTEMAS Y COMPUTACIÓN\n\n");
-    printf("\t\t   REPORTE ACADÉMICO DE ESTUDIANTES\n\n"); 
-    printf("NOMBRE DE LOS ESTUDIANTES: Franklin Pimentel; Samuel Henao     GRUPO: 2IL111\n");
-    printf("CÉDULAS: 20-70-8197; 20-14-8312 \n\n");
+    fprintf(ProyectoFinal, "\t        UNIVERSIDAD TECNOLÓGICA DE PANAMÁ\n");
+    fprintf(ProyectoFinal, "\t\t   CENTRO REGIONAL DE CHIRIQUÍ\n"); 
+    fprintf(ProyectoFinal, "\tFACULTAD DE INGENIERÍA DE SISTEMAS COMPUTACIONALES\n");
+    fprintf(ProyectoFinal, "\tLICENCIATURA EN IGENIERÍA DE SISTEMAS Y COMPUTACIÓN\n\n");
+    fprintf(ProyectoFinal, "\t\t   REPORTE ACADÉMICO DE ESTUDIANTES\n\n"); 
+    fprintf(ProyectoFinal, "NOMBRE DE LOS ESTUDIANTES: Franklin Pimentel; Samuel Henao     GRUPO: 2IL111\n");
+    fprintf(ProyectoFinal, "CÉDULAS: 20-70-8197; 20-14-8312 \n\n");
 }
 
 //funcion principal main
@@ -260,18 +262,24 @@ int main () {
     //Calcular total de creditos
     calcularCreditos(asignaturas, notas, vectorCreditos);
     //ENcabezado    
+    
+    ProyectoFinal = fopen("ProyectoFinal.txt", "w" );
+    if (ProyectoFinal == NULL) {
+    perror("Error al abrir el archivo ProyectoFinal.txt");
+    exit(1);
+}
     imprimirEncabezado();
 
     //Impresion de datos
     for(int i=0; i<8;i++){
 
         //datos del estuante
-        printf("%s\n", estudiantes[i].cedula);
-        printf("%s\n", estudiantes[i].nombre);
+        fprintf(ProyectoFinal, "%s\n", estudiantes[i].cedula);
+        fprintf(ProyectoFinal, "%s\n", estudiantes[i].nombre);
 
         //Imprimir los datos
         //encabezado
-        printf("%12s %10s %10s %10s %10s %10s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
+        fprintf(ProyectoFinal, "%15s %15s %15s %15s %15s %15s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
         for(int j=0; j<4; j++){
             //creditos
             creditos += sumatoriaCreditos(vectorCreditos[i][j]);
@@ -287,7 +295,7 @@ int main () {
                 condicional++;
             }
 
-            printf("%7d %10d %14d %7d %11.2f %7d \n", 
+            fprintf(ProyectoFinal, "%7d %10d %14d %7d %11.2f %7d \n", 
                 notas[i][j].año, 
                 j,  
                 puntos, 
@@ -297,14 +305,14 @@ int main () {
             );
         }
 
-        printf("\n");
+        fprintf(ProyectoFinal, "\n");
         mensjes(notas[i], condicional);
         puntos=0;
         creditos=0;
         condicional=0;
-        printf("\n\n");
+        fprintf(ProyectoFinal, "\n\n");
 
     }
-
+    fclose(ProyectoFinal);
     return 0;
 }
