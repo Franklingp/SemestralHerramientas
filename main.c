@@ -279,7 +279,7 @@ int main () {
 
         //Imprimir los datos
         //encabezado
-        fprintf(ProyectoFinal, "%15s %15s %15s %15s %15s %15s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
+        fprintf(ProyectoFinal, "%15s %15s %14s %15s %15s %15s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
         for(int j=0; j<4; j++){
             //creditos
             creditos += sumatoriaCreditos(vectorCreditos[i][j]);
@@ -295,7 +295,7 @@ int main () {
                 condicional++;
             }
 
-            fprintf(ProyectoFinal, "%7d %10d %14d %7d %11.2f %7d \n", 
+            fprintf(ProyectoFinal, "%7d %15d %18d %12d %18.2f %7d \n", 
                 notas[i][j].año, 
                 j,  
                 puntos, 
