@@ -2,12 +2,10 @@
 #include <stdlib.h>
 
 
-//definicion de arvhivos
 FILE * archivoAsignaturas;
 FILE * registroNotas;
 FILE * ProyectoFinal;
 
-//variable global para saber cantidad de estudiantes
 int NUMERO_ESTUDIANTES=8;
 
 //estructura de registro de notas de estudiante
@@ -26,7 +24,6 @@ struct registroNotas {
 };
 
 //estructura de registro para asignaciones
-//1 1 7987 - 5 CALCULO I
 struct registroAsignaturas {
     int semestre;
     int añoAcademico;
@@ -39,12 +36,9 @@ struct registroAsignaturas {
 //leer archivo de asignaturas
 void leerArchivoAsignatura(struct registroAsignaturas asignaturas[59]){
     int contador = 0;
-    //printf("Lectura de asignaturas **************\n");
     archivoAsignaturas = fopen("asignaturas.txt", "r");
 
-    // while(!(feof(archivoAignaturas)))
     while(contador<58){
-        //ESTO ES PARA IMPRIMIR TODAS LAS ASIGNATURAS
         fscanf(archivoAsignaturas, "%d %d %d %c %d %[^\n]\n", 
             &asignaturas[contador].añoAcademico, 
             &asignaturas[contador].semestre, 
@@ -52,16 +46,8 @@ void leerArchivoAsignatura(struct registroAsignaturas asignaturas[59]){
             &asignaturas[contador].status,
             &asignaturas[contador].creditos,
             asignaturas[contador].nombreAsignatura);
-        // printf("%d %d %s %c %d %s\n", 
-        //     asignaturas[contador].añoAcademico, 
-        //     asignaturas[contador].semestre, 
-        //     asignaturas[contador].codigoAsignatura,
-        //     asignaturas[contador].status,
-        //     asignaturas[contador].creditos,
-        //     asignaturas[contador].nombreAsignatura);
         contador++;
     }
-    //getch();
     fclose(archivoAsignaturas);
 }
 
@@ -70,40 +56,29 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
     int contadorEstudiante = 0;
     int auxiliarSemestre = 0;
     registroNotas = fopen("registroNotas.txt", "r");
-    //printf("Lectura de datos de notas ****** \n");
 
     registroNotas = fopen("registroNotas.txt", "r");
 
     while(contadorEstudiante<8){
 
-        //lee los datos de un estudiante
         fscanf(registroNotas, "%s %[^\n]\n", estudiantes[contadorEstudiante].cedula, estudiantes[contadorEstudiante].nombre);
-        // printf("%s %s \n", estudiantes[contadorEstudiante].cedula, estudiantes[contadorEstudiante].nombre);
 
-        //lee los datos del semestre
         for(int i=0; i<4; i++){ 
             fscanf(registroNotas, "%d %d \n", &notas[contadorEstudiante][i].año, &notas[contadorEstudiante][i].semestre);
-            // printf("%d %d \n", notas[contadorEstudiante][i].año, notas[contadorEstudiante][i].semestre);
 
             //verificacion si es verano
             if(notas[contadorEstudiante][i].semestre==0){
                 auxiliarSemestre=2;
-                // printf("Es un verano ******* \n");
             }else{
                 auxiliarSemestre=6;
-                // printf("Es un semestre ******* \n");
             }
 
             //lectura de notas
-            for(int j=0; j<auxiliarSemestre; j++){  //auxiliarSemestre
+            for(int j=0; j<auxiliarSemestre; j++){
                 fscanf(registroNotas, "%d %c \n", 
                     &notas[contadorEstudiante][i].codigoAsignatura[j], 
                     &notas[contadorEstudiante][i].notas[j]
                 );
-                // printf("%d %c \n", 
-                //     notas[contadorEstudiante][i].codigoAsignatura[j], 
-                //     notas[contadorEstudiante][i].notas[j]
-                // );
             }
         }
         contadorEstudiante++;
@@ -117,13 +92,9 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
 int sumatoriaPuntos(char notas[6], int creditos[6]){
     //printf("Sumatoria ***** \n");
     int sumatoria=0;
-
     //Verificacion de la nota para la sumatoria
     for(int i = 0; i < 6; i ++){
-        // printf("Nota: %c \n", notas[i]);
-        // printf("Creditos: %d \n", creditos[i]);
         if(notas[i] == 'A'){
-            // printf("Entra en A con %c \n", notas[i]);
             sumatoria = sumatoria + (3 * creditos[i]);
         }
             else if(notas[i] == 'B'){
@@ -136,19 +107,14 @@ int sumatoriaPuntos(char notas[6], int creditos[6]){
                         sumatoria += 0;
                     }
     }
-    // printf("Sumatoria: %d \n", sumatoria);
     return sumatoria;
 }
 
 //funcion para calcular un vector de creditos
 void calcularCreditos(struct registroAsignaturas asignaturas[59], struct registroNotas notas[8][4], int vectorCreditos[8][4][6]){
-    //printf("Calculo de total de creditos de un semestre ***************** \n");
     int creditos=0, contador=0, estudiante=0, auxiliar=0;
-    //ciclo para estudiante
     for(estudiante = 0; estudiante<8 ; estudiante++){
-        //Ciclo para semestre
         for(int semestre = 0; semestre < 4; semestre++){
-            //ciclo para asignatura
             if(notas[8][4].semestre==0){
                 auxiliar=2;
             }else{
@@ -156,11 +122,8 @@ void calcularCreditos(struct registroAsignaturas asignaturas[59], struct registr
             }
             for (int i = 0; i < 6; i++){
                 if(notas[estudiante][semestre].codigoAsignatura[i]!=0){
-                    // printf("%s \n", codigoAsignaturas[i]);
                     while (contador < 59){
                         if(asignaturas[contador].codigoAsignatura==notas[estudiante][semestre].codigoAsignatura[i]){
-                            //printf("bingo ******** \n");
-                            //printf("%s %d %d \n",asignaturas[contador].nombreAsignatura, asignaturas[contador].codigoAsignatura, asignaturas[contador].creditos);
                             vectorCreditos[estudiante][semestre][i] = asignaturas[contador].creditos;
                             contador=59;
                         }
@@ -168,26 +131,11 @@ void calcularCreditos(struct registroAsignaturas asignaturas[59], struct registr
                     }
                     contador=0;
                 }
-                //parche
-                // if(vectorCreditos[estudiante][semestre][i]>90){
-                //     printf("Prueba********** \n");
-                //     printf("vector de creditos: %d \n", vectorCreditos[estudiante][semestre][i]);
-                //     printf("Codigo en Asignatura: %d \n", asignaturas[contador].codigoAsignatura);
-                //     printf("codigo en notas: %d \n", notas[estudiante][semestre].codigoAsignatura[i]);
-                //     printf("Creditos en asignatura: %d \n", asignaturas[contador].creditos);
-                //     printf("estudiante : %d, semestre: %d, i que seria la materia: %d, contador de asignatura : %d\n",
-                //         estudiante, 
-                //         semestre, 
-                //         i, contador
-                //     );
-                //     //vectorCreditos[estudiante][semestre][i] = 6;
-                // }
             }
         }
     }
 }
 
-//sumatoria de creditos
 int sumatoriaCreditos(int vectorCreditos[6]){
     int sumatoria = 0;
     for(int i = 0; i < 6; i++){
@@ -234,7 +182,6 @@ void mensjes(struct registroNotas notas[4], int condicionales){
     }
 }
 
-//Imprimir el encabezado
 void imprimirEncabezado() {
     fprintf(ProyectoFinal, "\t     UNIVERSIDAD TECNOLÓGICA DE PANAMÁ\n");
     fprintf(ProyectoFinal, "\t\t   CENTRO REGIONAL DE CHIRIQUÍ\n"); 
@@ -247,44 +194,33 @@ void imprimirEncabezado() {
 
 //Numeros romanos
 char numerosRomanos(int semestre, char romano[2]){
-    // printf("Impresion de numeros romanoooooooosssss \n");
-    // printf("El numero que estra es: %d \n", semestre);
     if(semestre==0){
         romano[0]='0';
         romano[1]=' ';
-        // printf("Entro en 0 \n");
     }
     if(semestre==1){
         romano[0]='I';
         romano[1]=' ';
-        // printf("Entro en 1 \n");
     }
     if(semestre==2){
         romano[0]='I';
         romano[1]='I';
-        // printf("Entro en 2 \n");
     }
 }
 
-//funcion principal main
 int main () {
-    //defincion de variables
     struct registroEstudiante estudiantes[8];
     struct registroNotas notas[8][4];
     struct registroAsignaturas asignaturas[59];
     int vectorCreditos[8][4][6]={0}, totalCreditos[8][4], totalPuntos[8][4], puntos=0, creditos=0, condicional=0;
     float indice[8][4];
     char numeroRomano[2];
-    
-    //lectura de archivos 
+ 
     leerArchivoAsignatura(asignaturas);
 
-    //lectura de notas
     leerArchivoNotas(notas, estudiantes);
 
-    //Calcular total de creditos
-    calcularCreditos(asignaturas, notas, vectorCreditos);
-    //ENcabezado    
+    calcularCreditos(asignaturas, notas, vectorCreditos);  
     
     ProyectoFinal = fopen("ProyectoFinal.txt", "w" );
     if (ProyectoFinal == NULL) {
@@ -296,29 +232,21 @@ int main () {
     //Impresion de datos
     for(int i=0; i<8;i++){
 
-        //datos del estuante
         fprintf(ProyectoFinal, "%s\n", estudiantes[i].cedula);
         fprintf(ProyectoFinal, "%s\n", estudiantes[i].nombre);
 
-        //Imprimir los datos
-        //encabezado
         fprintf(ProyectoFinal, "%15s %15s %14s %15s %15s %15s \n", "Año lectivo", "Semestre", "Puntos", "Total/Cr", "Índice", "Condicional");
         for(int j=0; j<4; j++){
-            //creditos
             creditos += sumatoriaCreditos(vectorCreditos[i][j]);
 
-            //puntos del semestre
             puntos += sumatoriaPuntos(notas[i][j].notas, vectorCreditos[i][j]);
 
-            //indice
             indice[i][j] = (float)puntos/(float)creditos;
 
-            //Condicionales
             if(indice[i][j]<1.00){
                 condicional++;
             }
 
-            //Nmeros romanos para semestre;
             numerosRomanos(notas[i][j].semestre, numeroRomano);
 
             fprintf(ProyectoFinal, "%7d %19s %25d %16d %20.2f %9d \n", 
@@ -330,7 +258,7 @@ int main () {
                 condicional
             );
         }
-        //Limpiando las variables
+
         fprintf(ProyectoFinal, "\n");
         numeroRomano[0]=' ';
         numeroRomano[1]=' ';
