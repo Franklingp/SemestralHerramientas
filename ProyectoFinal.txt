@@ -23,8 +23,8 @@ BARREDA CASTRO, ISABELITA
    Año lectivo        Semestre         Puntos        Total/Cr         Índice     Condicional 
       2023                I                24              24           1.00          0 
       2023               II                42              46           0.91          1 
-      2024                0                48             605           0.08          2 
-      2024                I                68             626           0.11          3 
+      2024                0                48              52           0.92          2 
+      2024                I                68              73           0.93          3 
 
 HA OBTENIDO D COMO CALIFICACIÓN, RECUERDE QUE TIENE TRES OPCIONES: 
 1.	SI LA MATERIA ES FUNDAMENTAL, DEBE REPETIR LA MISMA. 
