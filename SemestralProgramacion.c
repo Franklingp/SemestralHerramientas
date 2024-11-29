@@ -83,14 +83,12 @@ void leerArchivoNotas(struct registroNotas notas[8][4], struct registroEstudiant
         }
         contadorEstudiante++;
     }
-    //getch();
     fclose(registroNotas);
     }
 
 
 //Funcion para calcular los puntos totales por asignacion
 int sumatoriaPuntos(char notas[6], int creditos[6]){
-    //printf("Sumatoria ***** \n");
     int sumatoria=0;
     //Verificacion de la nota para la sumatoria
     for(int i = 0; i < 6; i ++){
